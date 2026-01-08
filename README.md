@@ -37,4 +37,4 @@ Make Your Guess holt sich Daten von der Energy.ch API und speichert sie in einer
 
 ## Team
 
-[Anna Locher] & [Bianca Mazzoleni]
+Anna Locher & Bianca Mazzoleni
