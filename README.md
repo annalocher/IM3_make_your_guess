@@ -24,7 +24,7 @@ Make Your Guess holt sich Daten von der Energy.ch API und speichert sie in einer
 
 ## Benutzte Ressourcen
 
-- ChatGPT für Fragen wie "warum geht meine API nicht"
+- Code Assistenz: Claude / Chat GPT für Fragen. Beispiel: Wiso geht meine API nicht / index.php zeigt nur eine weisse Seite an
 - W3Schools für PHP Syntax
 - Chart.js Dokumentation
 
