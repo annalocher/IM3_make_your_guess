@@ -20,13 +20,14 @@ Make Your Guess holt sich Daten von der Energy.ch API und speichert sie in einer
 - Die API wollte zuerst nicht funktionieren, mussten cURL statt file_get_contents verwenden
 - Wenn alle Artists gleich oft gespielt wurden wusste das Spiel nicht wer gewonnen hat
 - Chart.js sah am Anfang nicht so aus wie wir wollten, viel rumprobiert mit den Farben
--
+
 
 ## Benutzte Ressourcen
 
 - Code Assistenz: Claude / Chat GPT für Fragen. Beispiel: Wiso geht meine API nicht / index.php zeigt nur eine weisse Seite an
 - W3Schools für PHP Syntax
 - Chart.js Dokumentation
+- Youtube
 
 ## Links
 
