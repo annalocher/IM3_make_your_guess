@@ -1,10 +1,10 @@
 # Make Your Guess
 
-Ein Ratespiel basierend auf Energy Radio Daten. Man muss erraten, welcher Artist heute am meisten gespielt wurde.
+Ein Ratespiel basierend auf den Daten von Radio Energy. Man muss erraten, welcher Artist heute am meisten gespielt wurde.
 
 ## Kurzbeschreibung
 
-Make Your Guess holt sich Daten von der Energy.ch API und speichert sie in einer Datenbank. Beim Spielen werden 3 Artists angezeigt und man muss raten, wer am meisten läuft. Nach dem Raten sieht man die Statistik als Chart.
+Make Your Guess holt sich Daten von der Energy.ch API und speichert sie in einer Datenbank. Beim Spielen werden 3 Artists angezeigt und man muss raten, wer am meisten läuft. Nach dem Raten sieht man die Statistik als Chart. 
 
 ## Learnings
 
@@ -38,4 +38,4 @@ Make Your Guess holt sich Daten von der Energy.ch API und speichert sie in einer
 
 ## Team
 
-Anna Locher & Bianca Mazzoleni
+Anna Locher & Bianca Mazzoleni 
