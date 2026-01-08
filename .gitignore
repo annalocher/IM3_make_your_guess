@@ -1,0 +1,10 @@
+
+.vscode/sftp.json
+config.php
+.env
+
+.DS_Store
+Thumbs.db
+
+*.swp
+*.swo

@@ -1,0 +1,481 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #4B4747;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.location,
+.date {
+    opacity: 0.9;
+}
+
+
+.screen {
+    flex: 1;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 40px 20px;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.glow-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../assets/1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.glow-bar {
+    display: none;
+}
+
+
+.subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    z-index: 1;
+    text-align: center;
+}
+
+.title-image {
+    max-width: 500px;
+    width: 80%;
+    height: auto;
+    z-index: 1;
+    margin: 20px 0;
+}
+
+.intro-text {
+    z-index: 1;
+    max-width: 400px;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.play-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgba(219, 112, 147, 0.5) 0%, rgba(180, 80, 120, 0.5) 100%);
+    border: 6px solid #3a3a3a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    z-index: 1;
+    transition: transform 0.2s, box-shadow 0.2s;
+    backdrop-filter: blur(2px);
+}
+
+.play-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(219, 112, 147, 0.5);
+}
+
+.play-icon {
+    font-size: 40px;
+    color: #3a3a3a;
+    margin-left: 8px;
+}
+
+
+.artists-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 1;
+    margin-top: 20px;
+}
+
+
+.artist-card {
+    width: 180px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.artist-card:hover {
+    transform: scale(1.05);
+}
+
+.artist-card img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid #3a3a3a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.artist-card .artist-name {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.artist-card .play-count {
+    text-align: center;
+    font-size: 12px;
+    color: #ff69b4;
+    margin-top: 4px;
+    font-weight: 400;
+}
+
+
+.result-text {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    z-index: 1;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+.result-text.success {
+    color: white;
+}
+
+.result-text.error {
+    color: white;
+}
+
+.result-text .highlight {
+    color: #ff69b4;
+}
+
+.result-artist {
+    z-index: 1;
+}
+
+.result-artist img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid #3a3a3a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.result-artist-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Stats Container */
+.result-stats {
+    z-index: 1;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.stats-container {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.stats-title {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #ff69b4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stats-tie-info {
+    font-size: 11px;
+    text-align: center;
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+.stats-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stat-row {
+    display: grid;
+    grid-template-columns: 30px 1fr 120px 80px;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-rank {
+    font-size: 12px;
+    color: #ff69b4;
+    font-weight: 600;
+}
+
+.stat-name {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stat-bar-container {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.stat-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #ff69b4, #ff8dc7);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.stat-value {
+    font-size: 12px;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.stats-total {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Chart Wrapper & Container */
+.chart-wrapper {
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.chart-title {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #ff69b4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.chart-container {
+    width: 100%;
+    height: 160px;
+}
+
+.chart-total {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Data Story */
+.data-story {
+    z-index: 1;
+    max-width: 400px;
+    margin-top: 20px;
+    padding: 15px 20px;
+    background: rgba(255, 105, 180, 0.15);
+    border-left: 3px solid #ff69b4;
+    border-radius: 0 10px 10px 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.data-story strong {
+    color: #ff69b4;
+}
+
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.back-button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+.back-button:hover {
+    opacity: 1;
+}
+
+.back-button.hidden {
+    visibility: hidden;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.energy-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.energy-logo {
+    height: 30px;
+    width: auto;
+}
+
+.click-more {
+    font-size: 12px;
+    background: #ff69b4;
+    padding: 5px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 48px;
+    }
+
+    .header,
+    .footer {
+        padding: 15px 20px;
+    }
+
+    .artists-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .artist-card {
+        width: 150px;
+    }
+
+    .artist-card img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .result-artist img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .glow-bar {
+        height: 40px;
+    }
+
+    .result-stats {
+        max-width: 90%;
+        padding: 0 10px;
+    }
+
+    .stat-row {
+        grid-template-columns: 25px 1fr 80px 60px;
+        gap: 5px;
+    }
+
+    .stat-name {
+        font-size: 12px;
+    }
+
+    .stat-value {
+        font-size: 11px;
+    }
+
+    .chart-wrapper {
+        max-width: 90%;
+    }
+
+    .chart-container {
+        height: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 36px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .play-button {
+        width: 80px;
+        height: 80px;
+    }
+
+    .play-icon {
+        font-size: 24px;
+    }
+}
