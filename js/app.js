@@ -1,15 +1,8 @@
-/**
- * Make Your Guess - Energy Radio Game
- * Interaktives Ratespiel basierend auf Energy Radio Playouts
- */
 
-// ============================================
-// DOM Helper Funktionen (wiederverwendbar)
-// ============================================
 
 /**
- * Holt ein DOM-Element per ID
- * @param {string} id - Element ID
+ 
+ * @param {string} id - 
  * @returns {HTMLElement|null}
  */
 function getElement(id) {
@@ -17,10 +10,10 @@ function getElement(id) {
 }
 
 /**
- * Erstellt ein DOM-Element mit Klassen und Inhalt
- * @param {string} tag - HTML Tag
- * @param {string} className - CSS Klassen
- * @param {string} innerHTML - HTML Inhalt
+ 
+ * @param {string} tag 
+ * @param {string} className 
+ * @param {string} innerHTML 
  * @returns {HTMLElement}
  */
 function createElement(tag, className = '', innerHTML = '') {
@@ -31,10 +24,9 @@ function createElement(tag, className = '', innerHTML = '') {
 }
 
 /**
- * Toggled eine CSS-Klasse auf einem Element
- * @param {HTMLElement} element - Das Element
- * @param {string} className - Die Klasse
- * @param {boolean} add - True = hinzufügen, False = entfernen
+ * @param {HTMLElement} element 
+ * @param {string} className 
+ * @param {boolean} add 
  */
 function toggleClass(element, className, add) {
     if (add) {
@@ -44,14 +36,12 @@ function toggleClass(element, className, add) {
     }
 }
 
-// ============================================
-// API Helper Funktionen (wiederverwendbar)
-// ============================================
+
 
 /**
- * Fetch-Wrapper mit Error Handling
- * @param {string} url - Die API URL
- * @param {object} options - Fetch Optionen
+ 
+ * @param {string} url 
+ * @param {object} options
  * @returns {Promise<object|null>}
  */
 async function fetchJson(url, options = {}) {
@@ -66,9 +56,9 @@ async function fetchJson(url, options = {}) {
 }
 
 /**
- * Lädt Daten von der Artists API
- * @param {number} limit - Anzahl Artists
- * @param {string} period - Zeitraum (today, week, month, all)
+ 
+ * @param {number} limit 
+ * @param {string} period
  * @returns {Promise<object|null>}
  */
 async function loadArtists(limit = 3, period = 'today') {
@@ -84,14 +74,11 @@ async function loadArtists(limit = 3, period = 'today') {
     return data;
 }
 
-// ============================================
-// UI Komponenten (wiederverwendbar)
-// ============================================
 
 /**
- * Erstellt eine Artist-Karte (ohne Play-Count - das wäre ja Spoiler!)
- * @param {object} artist - Artist Daten
- * @param {function} onClick - Click Handler
+ 
+ * @param {object} artist 
+ * @param {function} onClick -
  * @returns {HTMLElement}
  */
 function createArtistCard(artist, onClick) {
@@ -110,10 +97,10 @@ function createArtistCard(artist, onClick) {
 }
 
 /**
- * Rendert eine Liste von Artists in einen Container
- * @param {HTMLElement} container - Der Container
- * @param {array} artists - Liste der Artists
- * @param {function} onClick - Click Handler für jede Karte
+
+ * @param {HTMLElement} container 
+ * @param {array} artists 
+ * @param {function} onClick 
  */
 function renderArtistCards(container, artists, onClick) {
     container.innerHTML = '';
@@ -123,9 +110,7 @@ function renderArtistCards(container, artists, onClick) {
     });
 }
 
-// ============================================
-// Screen Management
-// ============================================
+
 
 const screens = {
     start: getElement('screen-start'),
@@ -136,7 +121,7 @@ const screens = {
 
 /**
  * Zeigt einen bestimmten Screen an
- * @param {string} screenName - Name des Screens
+ * @param {string} screenName
  */
 function showScreen(screenName) {
     Object.values(screens).forEach(screen => {
@@ -147,9 +132,7 @@ function showScreen(screenName) {
     toggleClass(btnBack, 'hidden', screenName === 'start');
 }
 
-// ============================================
-// Game Logic
-// ============================================
+
 
 const btnPlay = getElement('btn-play');
 const btnBack = getElement('btn-back');
@@ -170,13 +153,12 @@ let gameData = null;
 let currentChart = null;
 
 /**
- * Erstellt ein horizontales Bar Chart mit Chart.js im pink/grau Design
- * @param {HTMLCanvasElement} canvas - Das Canvas Element
- * @param {array} artists - Liste der Artists mit play_count
- * @returns {Chart} Die Chart-Instanz
+ * @param {HTMLCanvasElement} canvas 
+ * @param {array} artists 
+ * @returns {Chart} 
  */
 function createBarChart(canvas, artists) {
-    // Vorheriges Chart zerstören falls vorhanden
+    
     if (currentChart) {
         currentChart.destroy();
         currentChart = null;
@@ -194,7 +176,7 @@ function createBarChart(canvas, artists) {
     const labels = sorted.map(a => a.artist);
     const data = sorted.map(a => a.play_count || 0);
 
-    // Farben: #1 ist pink, andere sind halbtransparent weiss
+    
     const colors = sorted.map((_, index) =>
         index === 0 ? 'rgba(255, 105, 180, 0.9)' : 'rgba(255, 255, 255, 0.25)'
     );
@@ -277,8 +259,8 @@ function createBarChart(canvas, artists) {
 
 /**
  * Berechnet den Gesamtanteil der Plays
- * @param {array} artists - Liste der Artists
- * @returns {number} Gesamtzahl der Plays
+ * @param {array} artists 
+ * @returns {number} 
  */
 function getTotalPlays(artists) {
     return artists.reduce((sum, artist) => sum + (artist.play_count || 0), 0);
@@ -286,10 +268,10 @@ function getTotalPlays(artists) {
 
 /**
  * Generiert einen Data-Story Text basierend auf den Spieldaten
- * @param {object} winner - Der Gewinner-Artist
- * @param {array} artists - Alle Artists
- * @param {boolean} isCorrect - Hat der Spieler richtig geraten?
- * @returns {string} HTML für die Data-Story
+ * @param {object} winner 
+ * @param {array} artists 
+ * @param {boolean} isCorrect 
+ * @returns {string} 
  */
 function generateDataStory(winner, artists, isCorrect) {
     const total = getTotalPlays(artists);
@@ -315,10 +297,10 @@ function generateDataStory(winner, artists, isCorrect) {
 }
 
 /**
- * Berechnet den Prozentanteil
- * @param {number} count - Anzahl Plays
- * @param {number} total - Gesamtzahl
- * @returns {number} Prozent (gerundet)
+ 
+ * @param {number} count 
+ * @param {number} total 
+ * @returns {number}
  */
 function calculatePercentage(count, total) {
     if (total === 0) return 0;
@@ -326,14 +308,13 @@ function calculatePercentage(count, total) {
 }
 
 /**
- * Erstellt die Statistik-HTML für die Ergebnisseite
- * @param {array} artists - Liste der Artists (sortiert nach play_count)
- * @returns {string} HTML String
- */
+ 
+ * @param {array} artists 
+ * @returns {string} 
 /**
- * Formatiert einen Timestamp als Uhrzeit (HH:MM)
- * @param {string} timestamp - ISO Timestamp
- * @returns {string} Formatierte Uhrzeit
+ 
+ * @param {string} timestamp
+ * @returns {string}
  */
 function formatTime(timestamp) {
     if (!timestamp) return '';
@@ -342,8 +323,8 @@ function formatTime(timestamp) {
 }
 
 /**
- * Prüft ob es einen Gleichstand gibt (alle gleiche play_count)
- * @param {array} artists - Liste der Artists
+ 
+ * @param {array} artists 
  * @returns {boolean}
  */
 function hasTie(artists) {
@@ -356,11 +337,11 @@ function createStatsHTML(artists) {
     const total = getTotalPlays(artists);
     const isTied = hasTie(artists);
 
-    // Artists nach play_count sortieren, bei Gleichstand nach last_played (wer zuletzt gespielt wurde)
+    
     const sorted = [...artists].sort((a, b) => {
         const countDiff = (b.play_count || 0) - (a.play_count || 0);
         if (countDiff !== 0) return countDiff;
-        // Bei Gleichstand: wer zuletzt gespielt wurde, gewinnt
+      
         const aTime = a.last_played ? new Date(a.last_played).getTime() : 0;
         const bTime = b.last_played ? new Date(b.last_played).getTime() : 0;
         return bTime - aTime;
@@ -369,7 +350,7 @@ function createStatsHTML(artists) {
     let html = '<div class="stats-container">';
     html += '<p class="stats-title">Today\'s Play Stats</p>';
 
-    // Bei Gleichstand einen Hinweis anzeigen
+    
     if (isTied) {
         html += '<p class="stats-tie-info">Tie! Winner = most recently played</p>';
     }
@@ -420,7 +401,7 @@ function handleGuess(selectedArtist) {
         correctTotal.textContent = `Total plays: ${total}`;
         correctStory.innerHTML = storyHTML;
         showScreen('correct');
-        // Chart nach kurzem Delay erstellen (für smooth Animation)
+        // Chart nach kurzem Delay erstellen 
         setTimeout(() => createBarChart(correctChartCanvas, gameData.artists), 200);
     } else {
         wrongArtistImg.src = winnerImg;
@@ -429,14 +410,12 @@ function handleGuess(selectedArtist) {
         wrongStory.innerHTML = storyHTML;
         winnerNameSpan.textContent = winnerName;
         showScreen('wrong');
-        // Chart nach kurzem Delay erstellen (für smooth Animation)
+        // Chart nach kurzem Delay erstellen 
         setTimeout(() => createBarChart(wrongChartCanvas, gameData.artists), 200);
     }
 }
 
-/**
- * Startet ein neues Spiel
- */
+
 async function startGame() {
     gameData = await loadArtists();
 
@@ -446,14 +425,12 @@ async function startGame() {
     }
 }
 
-/**
- * Setzt das Spiel zurück
- */
+
 function resetGame() {
     gameData = null;
     artistsContainer.innerHTML = '';
 
-    // Chart zerstören falls vorhanden
+    
     if (currentChart) {
         currentChart.destroy();
         currentChart = null;
@@ -462,12 +439,9 @@ function resetGame() {
     showScreen('start');
 }
 
-// ============================================
-// Event Listeners & Initialisierung
-// ============================================
 
 btnPlay.addEventListener('click', startGame);
 btnBack.addEventListener('click', resetGame);
 
-// App starten
+
 showScreen('start');
